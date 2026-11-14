@@ -31,8 +31,7 @@ taskForm.addEventListener("submit", function (event) {
   renderTasks(); // Re-render the list of tasks
 });
 
-document.querySelector(".task-list");
-document.querySelector(`[data-status="${task.status}"] .task-list`);
+// Lines deleted from last save because it broke the drag-and-drop functionality
 
 function renderTasks() {
   document.querySelectorAll(".task-list").forEach(function (list) {
@@ -45,7 +44,26 @@ function renderTasks() {
     const card = document.createElement("div");
     card.classList.add("task-card");
     card.textContent = task.title;             
-
+    card.draggable = true; 
+    card.addEventListener("dragstart", function (e) {
+      e.dataTransfer.setData("text/plain", task.id);
+    });
     column.appendChild(card);               
   });
 }
+
+document.querySelectorAll(".column").forEach(function (column) {
+  column.addEventListener("dragover", function (e) {
+    e.preventDefault();
+  });  
+    column.addEventListener("drop", function (e) {
+      e.preventDefault();
+      const draggedTaskId = e.dataTransfer.getData("text/plain");
+      const task = tasks.find(function (t) {
+        return t.id === draggedTaskId;
+      });
+      task.status = column.dataset.status;
+      renderTasks();
+    });
+  
+  });
