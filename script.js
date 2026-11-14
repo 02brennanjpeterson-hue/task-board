@@ -1,3 +1,8 @@
+const SUPABASE_URL = "https://zezcqbkuchyopgobgclx.supabase.co";
+const SUPABASE_KEY = "sb_publishable_8t2hK-shADy1huvxD5z8AA_VllcZQTH";
+
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
 const addTaskButton = document.getElementById('add-task-button');
 const taskDialog = document.getElementById('task-dialog');
 const taskForm = document.getElementById('task-form');
