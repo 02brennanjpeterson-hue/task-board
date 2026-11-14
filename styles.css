@@ -1,0 +1,27 @@
+.board {
+  display: flex;
+  gap: 16px;
+}
+
+.column {
+  flex: 1;
+  padding: 16px;
+  border-radius: 8px;
+  min-height: 400px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  margin-bottom: 16px;
+}
+
+.task-card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  margin-bottom: 8px;
+}
