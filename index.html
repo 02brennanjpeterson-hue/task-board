@@ -9,25 +9,29 @@
   <script src="script.js" defer></script>
 </head>
 <body>
-  <header>
+    <header>
     <h1>Task Board</h1>
-    <button id="add-task-button">Add Task</button>
+    <div class="header-actions">
+      <button id="theme-toggle" type="button" aria-label="Toggle dark mode">🌙</button>
+      <button id="add-task-button">Add Task</button>
+    </div>
   </header>
-  <main class="board">
+  <p id="status-message" class="status-message"></p>
+    <main class="board">
     <section class="column" data-status="todo">
-      <h2>To Do</h2>
+      <h2>To Do <span class="task-count">0</span></h2>
       <div class="task-list"></div>
     </section>
     <section class="column" data-status="in_progress">
-      <h2>In Progress</h2>
+      <h2>In Progress <span class="task-count">0</span></h2>
       <div class="task-list"></div>
     </section>
     <section class="column" data-status="in_review">
-      <h2>In Review</h2>
+      <h2>In Review <span class="task-count">0</span></h2>
       <div class="task-list"></div>
     </section>
     <section class="column" data-status="done">
-      <h2>Done</h2>
+      <h2>Done <span class="task-count">0</span></h2>
       <div class="task-list"></div>
     </section>
   </main>
@@ -45,6 +49,7 @@
       </select>
       <label for="task-due-date">Due Date</label>
       <input type="date" id="task-due-date">
+      <p id="form-error-message" class="error-message"></p>
       <button type="submit">Add Task</button>
       <button type="button" id="cancel-button">Cancel</button>
     </form>
