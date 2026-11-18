@@ -168,6 +168,11 @@ taskForm.addEventListener("submit", async function (event) {
     return;
   }
 
+  // Lock the button so it can't be clicked twice                    
+  const submitButton = taskForm.querySelector('button[type="submit"]'); 
+  submitButton.disabled = true;                                         
+  submitButton.textContent = "Saving…";                                 
+
   // 2. Send it to Supabase to save
   const { data, error } = await supabaseClient
     .from("tasks")
@@ -175,15 +180,19 @@ taskForm.addEventListener("submit", async function (event) {
     .select()
     .single();
 
+  // Unlock the button again, whether it worked or not                  
+  submitButton.disabled = false;                                        
+  submitButton.textContent = "Add Task";                                
+
   // 3. If it failed, say so and stop
   if (error) {
     console.error("Could not save task:", error.message);
-    formError.textContent = "Couldn't save your task. Please try again.";    
+    formError.textContent = "Couldn't save your task. Please try again.";
     return;
   }
 
   // 4. It saved, so put it on the board
-  formError.textContent = "";                                                     
+  formError.textContent = "";
   tasks.push(data);
   taskForm.reset();
   taskDialog.close();
